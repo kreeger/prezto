@@ -1,0 +1,28 @@
+#
+# Exposes information about the Swift environment via the $swift_info associative
+# array.
+#
+# Authors:
+#   Ben Kreeger <ben.kreeger@icloud.com>
+#
+
+local version
+local version_format
+local version_formatted
+
+# Clean up previous $swift_info.
+unset swift_info
+typeset -gA swift_info
+
+if (( $+commands[swiftenv] )); then
+  version="$(swiftenv version-name)"
+# elif (( $+commands[swift] )); then
+#   version="${${$(swift --version)[(w)1,(w)2]}/ /-}"
+fi
+
+# Format version.
+if [[ -n "$version" ]]; then
+  zstyle -s ':prezto:module:swift:info:version' format 'version_format'
+  zformat -f version_formatted "$version_format" "v:$version"
+  swift_info[version]="$version_formatted"
+fi
