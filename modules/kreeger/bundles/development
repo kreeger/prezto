@@ -1,0 +1,12 @@
+function code () {
+    cd ~/src/$1
+}
+function oreilly() {
+    cd ~/src/oreilly/$1
+}
+function kreeger () {
+    cd ~/src/kreeger/$1
+}
+function make-targz () {
+    tar cvf - $1 | gzip > $1.tar.gz
+}
