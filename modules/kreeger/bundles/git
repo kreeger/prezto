@@ -1,0 +1,54 @@
+function gpcb() {
+    git push $(git-current-remote) $(git-branch-name)
+}
+function git-branch-name() {
+    git rev-parse --abbrev-ref HEAD
+}
+function gll() {
+    REMOTE=${1:-$(git-current-remote)}
+    git pull $REMOTE $(git-branch-name)
+}
+function git-current-remote() {
+    git config branch.$(git-branch-name).remote
+}
+function git-nb () {
+    git checkout -b $1 && git push -u origin $1
+}
+function gpu () {
+    git push upstream $(git-branch-name)
+}
+function gfu () {
+    BRANCH=$(git-branch-name)
+    git fetch upstream $BRANCH && git merge upstream/$BRANCH
+}
+function gtg () {
+    git tag -s $1 && gp && gp --tags
+}
+function git-prune-branches () {
+    REMOTE=$1
+    git branch -r | awk '{print $1}' | egrep -v -f /dev/fd/0 <(git branch -vv | grep $REMOTE) | awk '{print $1}' | xargs git branch -d
+}
+function git-after-pr () {
+    git checkout master && gfu && git push origin master
+    git remote prune origin && git-prune-branches origin
+    git remote prune upstream && git-prune-branches upstream
+}
+function git-after-origin-pr () {
+    git checkout master && git fetch origin && git pull origin master
+    git remote prune origin && git-prune-branches origin
+}
+function git-dfm () {
+    git diff $(git-branch-name)..master
+}
+function git-diff-from () {
+    git diff $(git-branch-name)..$1
+}
+function git-move-upstream() {
+    BRANCH=$(git-branch-name)
+    git push -u upstream $BRANCH
+    git push origin :$BRANCH
+}
+function git-ovenbits() {
+    git config user.email "ben.kreeger@ovenbits.com"
+    git config user.signingkey 03C1BB4C
+}

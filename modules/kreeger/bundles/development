@@ -1,0 +1,18 @@
+function code () {
+    cd ~/Code/$1
+}
+function capu() {
+    cd ~/Code/ovenbits/$1
+}
+function ovenbits() {
+    cd ~/Code/ovenbits/$1
+}
+function ob() {
+    cd ~/Code/ovenbits/$1
+}
+function kreeger () {
+    cd ~/Code/kreeger/$1
+}
+function make-targz () {
+    tar cvf - $1 | gzip > $1.tar.gz
+}
