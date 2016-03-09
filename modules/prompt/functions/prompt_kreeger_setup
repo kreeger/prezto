@@ -53,10 +53,14 @@ function prompt_kreeger_build_prompt {
     prompt_kreeger_start_segment yellow black '${(e)swift_info[version]}'
   fi
 
+  if [[ -n "$node_info" ]]; then
+    prompt_kreeger_start_segment green black '${(e)node_info[version]}'
+  fi
+
   prompt_kreeger_start_segment cyan black '$_prompt_kreeger_pwd'
 
   if [[ -n "$git_info" ]]; then
-    prompt_kreeger_start_segment green black '${(e)git_info[ref]}${(e)git_info[status]}'
+    prompt_kreeger_start_segment magenta black '${(e)git_info[ref]}${(e)git_info[status]}'
   fi
 
   prompt_kreeger_end_segment
@@ -129,6 +133,11 @@ function prompt_kreeger_precmd {
     swift-info
   fi
 
+  # Get Node info.
+  if (( $+functions[node-info] )); then
+    node-info
+  fi
+
   # Get Python info.
   # if (( $+functions[python-info] )); then
   #   python-info
@@ -186,6 +195,9 @@ function prompt_kreeger_setup {
 
   # Set swift-info parameters
   zstyle ':prezto:module:swift:info:version' format '%v%f'
+
+  # Set node-info parameters
+  zstyle ':prezto:module:node:info:version' format '%v%f'
 
   # Set python-info parameters.
   # zstyle ':prezto:module:python:info:virtualenv' format '%v%f'

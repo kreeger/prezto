@@ -1,0 +1,18 @@
+#
+# Displays the path to the Node application root directory.
+#
+# Authors:
+#   Ben Kreeger <ben.kreeger@icloud.com>
+#
+
+local root_dir="$PWD"
+
+while [[ "$root_dir" != '/' ]]; do
+  if [[ -f "$root_dir/.node-version" ]]; then
+    print "$root_dir"
+    break
+  fi
+  root_dir="$root_dir:h"
+done
+
+return 1
