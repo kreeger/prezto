@@ -15,3 +15,23 @@ fi
 alias ll="ls -FlaGh"
 alias s="subl"
 
+# eval "$(docker-machine env default)"
+
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    check_ui_style () {
+        apple_val=$(defaults read -g AppleInterfaceStyle 2>/dev/null)
+        adapt_to_ui $apple_val
+    }
+
+    adapt_to_ui () {
+        if [[ $1 == "Dark" ]]; then
+            echo -ne "\033]50;SetProfile=Night\a"
+            export ITERM_PROFILE="Night"
+        else
+            echo -ne "\033]50;SetProfile=Day\a"
+            export ITERM_PROFILE="Day"
+        fi
+    }
+
+    check_ui_style
+fi
