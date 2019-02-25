@@ -59,5 +59,4 @@ function git-move-upstream() {
 }
 function git-oreilly() {
     git config user.email "bkreeger@oreilly.com"
-    git config user.signingkey B6A3E20C1B9E0275
 }

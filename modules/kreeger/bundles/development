@@ -1,6 +1,3 @@
-function code () {
-    cd ~/src/$1
-}
 function oreilly() {
     cd ~/src/oreilly/$1
 }

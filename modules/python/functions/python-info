@@ -40,6 +40,8 @@ fi
 if [[ -n "$version_format" ]]; then
   if (( $+commands[pyenv] )); then
     version="${"$(pyenv version)"%% *}"
+  elif (( $+commands[asdf] )); then
+    version="${${$(asdf current python)[(w)1]}/ /-}"
   elif (( $+commands[python] )); then
     version="${$(python3 --version)#Python }"
   fi

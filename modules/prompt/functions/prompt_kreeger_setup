@@ -49,8 +49,8 @@ function prompt_kreeger_build_prompt {
     prompt_kreeger_start_segment red black '${(e)ruby_info[version]}'
   fi
 
-  if [[ -n "$_python_version" ]]; then
-    prompt_kreeger_start_segment yellow black '${_python_version}'
+  if [[ -n "$python_info" ]]; then
+    prompt_kreeger_start_segment yellow black '${(e)python_info[version]}'
   fi
 
   if [[ -n "$node_info" ]]; then
@@ -65,22 +65,6 @@ function prompt_kreeger_build_prompt {
   fi
 
   prompt_kreeger_end_segment
-}
-
-function prompt_kreeger_python_version {
-  if [[ ! -z $PYENV_VERSION ]]; then
-    _python_version=$PYENV_VERSION
-  elif [[ -f .python-version ]]; then
-    _python_version=$(cat .python-version)
-  elif [[ -f ~/.pyenv/version ]]; then
-    _python_version=$(cat ~/.pyenv/version)
-  else
-    _python_version=system
-  fi
-
-  if [[ ! -z $VIRTUAL_ENV ]]; then
-    _python_version="${_python_version} ($(basename $VIRTUAL_ENV))"
-  fi
 }
 
 function prompt_kreeger_pwd {
@@ -141,9 +125,6 @@ function prompt_kreeger_precmd {
     python-info
   fi
 
-  # Get Python info.
-  prompt_kreeger_python_version
-
   # Calculate and print the elapsed time.
   prompt_kreeger_print_elapsed_time
 }
@@ -197,7 +178,7 @@ function prompt_kreeger_setup {
   zstyle ':prezto:module:node:info:version' format '%v%f'
 
   # Set python-info parameters.
-  zstyle ':prezto:module:python:info:virtualenv' format '%v%f'
+  zstyle ':prezto:module:python:info:version' format '%v%f'
 
   # Define prompts.
   PROMPT='

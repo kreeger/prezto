@@ -15,8 +15,6 @@ fi
 alias ll="ls -FlaGh"
 alias s="subl"
 
-# eval "$(docker-machine env default)"
-
 if [[ "$(uname -s)" == "Darwin" ]]; then
     check_ui_style () {
         apple_val=$(defaults read -g AppleInterfaceStyle 2>/dev/null)

@@ -17,8 +17,8 @@ fi
 # Editors
 #
 
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 export PAGER='less'
 
 #
@@ -93,3 +93,9 @@ if [ -f "${HOME}/.gpg-agent-info" ]; then
 fi
 GPG_TTY=$(tty)
 export GPG_TTY
+
+#
+# Swift
+#
+
+# export TOOLCHAINS=swift
